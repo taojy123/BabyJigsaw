@@ -21,7 +21,7 @@
 
 {% block script %}
   <script>
-    let z = 1000
+    var z = 1000
     new Vue({
       el: '#app',
       data: function() {
@@ -35,18 +35,18 @@
           options.stop = (event, info) => {
                 // console.log(info.offset.left, info.offset.top)
 
-                const x = parseInt("{{ x }}")
-                const y = parseInt("{{ y }}")
-                const x1 = parseInt($("#p1").css("left"))
-                const y1 = parseInt($("#p1").css("top"))
-                const x2 = parseInt($("#p2").css("left"))
-                const y2 = parseInt($("#p2").css("top"))
-                const x3 = parseInt($("#p3").css("left"))
-                const y3 = parseInt($("#p3").css("top"))
-                const x4 = parseInt($("#p4").css("left"))
-                const y4 = parseInt($("#p4").css("top"))
+                var x = parseInt("{{ x }}")
+                var y = parseInt("{{ y }}")
+                var x1 = parseInt($("#p1").css("left"))
+                var y1 = parseInt($("#p1").css("top"))
+                var x2 = parseInt($("#p2").css("left"))
+                var y2 = parseInt($("#p2").css("top"))
+                var x3 = parseInt($("#p3").css("left"))
+                var y3 = parseInt($("#p3").css("top"))
+                var x4 = parseInt($("#p4").css("left"))
+                var y4 = parseInt($("#p4").css("top"))
 
-                let d = 0
+                var d = 0
                 d += Math.abs(x1 + x - x2)
                 d += Math.abs(y1 - y2)
                 d += Math.abs(x1 - x3)
@@ -55,7 +55,7 @@
                 d += Math.abs(y1 + y - y4)
 
                 if (d < 80) {
-                    let audio= new Audio("{% static 'zan.mp3' %}")
+                    var audio= new Audio("{% static 'zan.mp3' %}")
                     audio.play()
                     setTimeout(()=>{
                         this.win = true
