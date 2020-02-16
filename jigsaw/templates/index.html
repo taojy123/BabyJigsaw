@@ -57,7 +57,8 @@
                 d += Math.abs(x1 + x - x4)
                 d += Math.abs(y1 + y - y4)
 
-                if (d < 120) {
+                if (d < 100) {
+                    $("#app").css('background-color', 'lightyellow')
                     mp3.play()
                     setTimeout(function(){
                         vue.win = true
