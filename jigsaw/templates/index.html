@@ -4,15 +4,17 @@
 {% block content %}
   <div id="app" style="padding: 10px; display: none">
 
-    <div id="board" style="border: #3a8ee6 1px solid; width: 100%; height: calc(100vh - 50px); border-radius: 10px; overflow: hidden">
-        <img id="p1" class="draggable" src="{{ p.p1.url }}" style="position: absolute; border-radius: 5px; top: {{ t1 }}px; left: {{ l1 }}px">
-        <img id="p2" class="draggable" src="{{ p.p2.url }}" style="position: absolute; border-radius: 5px; top: {{ t2 }}px; left: {{ l2 }}px">
-        <img id="p3" class="draggable" src="{{ p.p3.url }}" style="position: absolute; border-radius: 5px; top: {{ t3 }}px; left: {{ l3 }}px">
-        <img id="p4" class="draggable" src="{{ p.p4.url }}" style="position: absolute; border-radius: 5px; top: {{ t4 }}px; left: {{ l4 }}px">
+    <div id="board" style="border: #3a8ee6 1px solid; width: calc(100vw - 25px); height: calc(100vh - 50px); border-radius: 10px; overflow: hidden; position: absolute">
+        <img id="p1" class="draggable" src="{{ p.p1.url }}" style="position: absolute; border-radius: 5px; {{ pos.0 }}">
+        <img id="p2" class="draggable" src="{{ p.p2.url }}" style="position: absolute; border-radius: 5px; {{ pos.1 }}">
+        <img id="p3" class="draggable" src="{{ p.p3.url }}" style="position: absolute; border-radius: 5px; {{ pos.2 }}">
+        <img id="p4" class="draggable" src="{{ p.p4.url }}" style="position: absolute; border-radius: 5px; {{ pos.3 }}">
     </div>
 
-    <div v-if="win" style="position: fixed; left: 0; top: 0; width: 100vw; height: 97vh; text-align: center; z-index: 2000">
-        <img src="{% static zan %}" style="margin-top: 22px; width: 70%; max-height: 90%;" @click="next">
+    <div v-if="win" style="position: fixed; left: 0; top: 0; width: 100vw; height: 97vh; text-align: center; z-index: 2000;cursor: pointer" @click="next">
+        <p style="position: absolute; right: 10%; bottom: 10%;"><el-tag>点击继续</el-tag></p>
+        <img src="{% static zan %}" style="margin-top: 22px; width: 70%; max-height: 90%;">
+
     </div>
 
   </div>
@@ -58,11 +60,12 @@
                 d += Math.abs(y1 + y - y4)
 
                 if (d < 100) {
-                    $("#app").css('background-color', 'lightyellow')
+                    $("#board").css('background-color', 'lightyellow')
                     mp3.play()
                     setTimeout(function(){
                         vue.win = true
-                    }, 6000)
+                        $("#board").css('background-color', '')
+                    }, 3000)
                 }
 
           }

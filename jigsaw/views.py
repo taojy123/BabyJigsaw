@@ -61,14 +61,14 @@ def index(request):
     next_id = p.id + 1
 
     zan = 'imgs/z0%d.jpg' % random.randint(1, 7)
-    t1 = random.randint(10, 300)
-    t2 = random.randint(10, 300)
-    t3 = random.randint(10, 300)
-    t4 = random.randint(10, 300)
-    l1 = random.randint(10, 600)
-    l2 = random.randint(10, 600)
-    l3 = random.randint(10, 600)
-    l4 = random.randint(10, 600)
+
+    pos = [
+        "top: %dpx; left: %dpx" % (random.randint(10, 100), random.randint(10, 100)),
+        "top: %dpx; right: %dpx" % (random.randint(10, 100), random.randint(10, 100)),
+        "bottom: %dpx; left: %dpx" % (random.randint(10, 100), random.randint(10, 100)),
+        "bottom: %dpx; right: %dpx" % (random.randint(10, 100), random.randint(10, 100)),
+    ]
+    random.shuffle(pos)
 
     return render(request, 'index.html', locals())
 
