@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from jigsaw.models import Picture
+
+
+@admin.register(Picture)
+class RecordAdmin(admin.ModelAdmin):
+    list_display = ('id', 'pic')

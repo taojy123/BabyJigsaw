@@ -1,0 +1,80 @@
+{% extends "vue_base.html" %}
+{% load static i18n %}
+
+{% block content %}
+  <div id="app" style="padding: 20px; display: none">
+
+    <div id="board" style="border: #3a8ee6 1px solid; width: 100%; height: calc(100vh - 50px); border-radius: 10px; overflow: hidden">
+        <img id="p1" class="draggable" src="{{ p.p1.url }}" style="position: absolute; border-radius: 5px; top: {{ t1 }}px; left: {{ l1 }}px">
+        <img id="p2" class="draggable" src="{{ p.p2.url }}" style="position: absolute; border-radius: 5px; top: {{ t2 }}px; left: {{ l2 }}px">
+        <img id="p3" class="draggable" src="{{ p.p3.url }}" style="position: absolute; border-radius: 5px; top: {{ t3 }}px; left: {{ l3 }}px">
+        <img id="p4" class="draggable" src="{{ p.p4.url }}" style="position: absolute; border-radius: 5px; top: {{ t4 }}px; left: {{ l4 }}px">
+    </div>
+
+    <div v-if="win" style="position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; text-align: center; z-index: 2000">
+        <img src="{% static zan %}" style="margin-top: 15%; width: 70%;max-width: 100%;" @click="next">
+    </div>
+
+  </div>
+{% endblock %}
+
+
+{% block script %}
+  <script>
+    let z = 1000
+    new Vue({
+      el: '#app',
+      data: function() {
+        return {
+            win: false,
+        }
+      },
+      mounted() {
+          $("#app").show()
+          options={}
+          options.stop = (event, info) => {
+                // console.log(info.offset.left, info.offset.top)
+
+                const x = parseInt("{{ x }}")
+                const y = parseInt("{{ y }}")
+                const x1 = parseInt($("#p1").css("left"))
+                const y1 = parseInt($("#p1").css("top"))
+                const x2 = parseInt($("#p2").css("left"))
+                const y2 = parseInt($("#p2").css("top"))
+                const x3 = parseInt($("#p3").css("left"))
+                const y3 = parseInt($("#p3").css("top"))
+                const x4 = parseInt($("#p4").css("left"))
+                const y4 = parseInt($("#p4").css("top"))
+
+                let d = 0
+                d += Math.abs(x1 + x - x2)
+                d += Math.abs(y1 - y2)
+                d += Math.abs(x1 - x3)
+                d += Math.abs(y1 + y - y3)
+                d += Math.abs(x1 + x - x4)
+                d += Math.abs(y1 + y - y4)
+
+                if (d < 80) {
+                    let audio= new Audio("{% static 'zan.mp3' %}")
+                    audio.play()
+                    setTimeout(()=>{
+                        this.win = true
+                    }, 6000)
+                }
+
+          }
+          $(".draggable" ).draggable(options)
+          $(".draggable").mousedown(function () {
+              z++
+              $(this).css('z-index', z)
+          })
+      },
+      methods: {
+          next(){
+              top.location.href = '/?id={{ next_id }}'
+          }
+      }
+    })
+  </script>
+{% endblock %}
+
