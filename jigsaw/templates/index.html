@@ -12,7 +12,9 @@
     </div>
 
     <div v-if="win" style="position: fixed; left: 0; top: 0; width: 100vw; height: 97vh; text-align: center; z-index: 2000;cursor: pointer" @click="next">
-        <p style="position: absolute; right: 10%; bottom: 10%;"><el-tag>点击继续</el-tag></p>
+        <p style="position: absolute; right: 10%; bottom: 10%;">
+            <el-tag style="font-size: 36px; line-height: 48px; height: 52px">点击继续</el-tag>
+        </p>
         <img src="{% static zan %}" style="margin-top: 22px; width: 70%; max-height: 90%;">
 
     </div>
