@@ -21,7 +21,9 @@
 
 {% block script %}
   <script>
+    alert(7)
     var z = 1000
+    alert(8)
     new Vue({
       el: '#app',
       data: function() {
@@ -30,6 +32,7 @@
         }
       },
       mounted() {
+          alert(10)
           $("#app").show()
           options={}
           options.stop = (event, info) => {
@@ -75,6 +78,7 @@
           }
       }
     })
+    alert(9)
   </script>
 {% endblock %}
 
