@@ -22,62 +22,62 @@
 {% block script %}
   <script>
     alert(7)
-    var z = 1000
-    alert(8)
-    new Vue({
-      el: '#app',
-      data: function() {
-        return {
-            win: false,
-        }
-      },
-      mounted() {
-          alert(10)
-          $("#app").show()
-          options={}
-          options.stop = (event, info) => {
-                // console.log(info.offset.left, info.offset.top)
-
-                var x = parseInt("{{ x }}")
-                var y = parseInt("{{ y }}")
-                var x1 = parseInt($("#p1").css("left"))
-                var y1 = parseInt($("#p1").css("top"))
-                var x2 = parseInt($("#p2").css("left"))
-                var y2 = parseInt($("#p2").css("top"))
-                var x3 = parseInt($("#p3").css("left"))
-                var y3 = parseInt($("#p3").css("top"))
-                var x4 = parseInt($("#p4").css("left"))
-                var y4 = parseInt($("#p4").css("top"))
-
-                var d = 0
-                d += Math.abs(x1 + x - x2)
-                d += Math.abs(y1 - y2)
-                d += Math.abs(x1 - x3)
-                d += Math.abs(y1 + y - y3)
-                d += Math.abs(x1 + x - x4)
-                d += Math.abs(y1 + y - y4)
-
-                if (d < 80) {
-                    var audio= new Audio("{% static 'zan.mp3' %}")
-                    audio.play()
-                    setTimeout(()=>{
-                        this.win = true
-                    }, 6000)
-                }
-
-          }
-          $(".draggable" ).draggable(options)
-          $(".draggable").mousedown(function () {
-              z++
-              $(this).css('z-index', z)
-          })
-      },
-      methods: {
-          next(){
-              top.location.href = '/?id={{ next_id }}'
-          }
-      }
-    })
+    {#var z = 1000#}
+    {#alert(8)#}
+    {#new Vue({#}
+    {#  el: '#app',#}
+    {#  data: function() {#}
+    {#    return {#}
+    {#        win: false,#}
+    {#    }#}
+    {#  },#}
+    {#  mounted() {#}
+    {#      alert(10)#}
+    {#      $("#app").show()#}
+    {#      options={}#}
+    {#      options.stop = (event, info) => {#}
+    {#            // console.log(info.offset.left, info.offset.top)#}
+    {##}
+    {#            var x = parseInt("{{ x }}")#}
+    {#            var y = parseInt("{{ y }}")#}
+    {#            var x1 = parseInt($("#p1").css("left"))#}
+    {#            var y1 = parseInt($("#p1").css("top"))#}
+    {#            var x2 = parseInt($("#p2").css("left"))#}
+    {#            var y2 = parseInt($("#p2").css("top"))#}
+    {#            var x3 = parseInt($("#p3").css("left"))#}
+    {#            var y3 = parseInt($("#p3").css("top"))#}
+    {#            var x4 = parseInt($("#p4").css("left"))#}
+    {#            var y4 = parseInt($("#p4").css("top"))#}
+    {##}
+    {#            var d = 0#}
+    {#            d += Math.abs(x1 + x - x2)#}
+    {#            d += Math.abs(y1 - y2)#}
+    {#            d += Math.abs(x1 - x3)#}
+    {#            d += Math.abs(y1 + y - y3)#}
+    {#            d += Math.abs(x1 + x - x4)#}
+    {#            d += Math.abs(y1 + y - y4)#}
+    {##}
+    {#            if (d < 80) {#}
+    {#                var audio= new Audio("{% static 'zan.mp3' %}")#}
+    {#                audio.play()#}
+    {#                setTimeout(()=>{#}
+    {#                    this.win = true#}
+    {#                }, 6000)#}
+    {#            }#}
+    {##}
+    {#      }#}
+    {#      $(".draggable" ).draggable(options)#}
+    {#      $(".draggable").mousedown(function () {#}
+    {#          z++#}
+    {#          $(this).css('z-index', z)#}
+    {#      })#}
+    {#  },#}
+    {#  methods: {#}
+    {#      next(){#}
+    {#          top.location.href = '/?id={{ next_id }}'#}
+    {#      }#}
+    {#  }#}
+    {#})#}
     alert(9)
   </script>
 {% endblock %}
