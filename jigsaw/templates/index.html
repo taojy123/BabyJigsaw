@@ -2,7 +2,7 @@
 {% load static i18n %}
 
 {% block content %}
-  <div id="app" style="padding: 5px; display: none">
+  <div id="app" style="padding: 10px; display: none">
 
     <div id="board" style="border: #3a8ee6 1px solid; width: 100%; height: calc(100vh - 50px); border-radius: 10px; overflow: hidden">
         <img id="p1" class="draggable" src="{{ p.p1.url }}" style="position: absolute; border-radius: 5px; top: {{ t1 }}px; left: {{ l1 }}px">
@@ -11,7 +11,7 @@
         <img id="p4" class="draggable" src="{{ p.p4.url }}" style="position: absolute; border-radius: 5px; top: {{ t4 }}px; left: {{ l4 }}px">
     </div>
 
-    <div v-if="win" style="position: fixed; left: 0; top: 0; width: 100vw; height: 95vh; text-align: center; z-index: 2000">
+    <div v-if="win" style="position: fixed; left: 0; top: 0; width: 100vw; height: 97vh; text-align: center; z-index: 2000">
         <img src="{% static zan %}" style="margin-top: 22px; width: 70%; max-height: 90%;" @click="next">
     </div>
 
@@ -22,6 +22,8 @@
 {% block script %}
   <script>
     var z = 1000
+    var mp3= new Audio("{% static 'zan.mp3' %}")
+    mp3.load()
     new Vue({
       el: '#app',
       data: function() {
@@ -56,8 +58,7 @@
                 d += Math.abs(y1 + y - y4)
 
                 if (d < 80) {
-                    var audio= new Audio("{% static 'zan.mp3' %}")
-                    audio.play()
+                    mp3.play()
                     setTimeout(function(){
                         vue.win = true
                     }, 6000)
