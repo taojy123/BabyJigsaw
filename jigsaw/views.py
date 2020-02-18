@@ -1,3 +1,4 @@
+import base64
 import random
 from io import BytesIO
 
@@ -8,18 +9,13 @@ from django.shortcuts import render, redirect
 from jigsaw.models import Picture
 
 
-def make_memory_file(im, format, name):
+def make_image_data(im, format):
     bio = BytesIO()
     im.save(bio, format)
-    pic_file = InMemoryUploadedFile(
-        file=bio,
-        field_name=None,
-        name=name,
-        content_type=None,
-        size=None,
-        charset=None
-    )
-    return pic_file
+    bio.seek(0)
+    b = bio.read()
+    s = base64.b64encode(b).decode()
+    return 'data:image;base64,%s' % s
 
 
 def index(request):
@@ -32,7 +28,7 @@ def index(request):
     im = Image.open(p.pic)
     w, h = im.size
 
-    # 图片变成高度 400
+    # 把图片变成高度 400
     w = int(400 * w / h)
     h = 400
     im0 = im.resize((w, h), 1)
@@ -49,14 +45,10 @@ def index(request):
     im3 = im0.crop((0, y, x, h))
     im4 = im0.crop((x, y, w, h))
 
-    format = im.format
-    name = p.pic.name
-
-    p.p1 = make_memory_file(im1, format, name)
-    p.p2 = make_memory_file(im2, format, name)
-    p.p3 = make_memory_file(im3, format, name)
-    p.p4 = make_memory_file(im4, format, name)
-    p.save()
+    p1 = make_image_data(im1, im.format)
+    p2 = make_image_data(im2, im.format)
+    p3 = make_image_data(im3, im.format)
+    p4 = make_image_data(im4, im.format)
 
     next_id = p.id + 1
 

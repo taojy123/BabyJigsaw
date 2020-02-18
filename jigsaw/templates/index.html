@@ -5,10 +5,10 @@
   <div id="app" style="padding: 10px; display: none">
 
     <div id="board" style="border: #3a8ee6 1px solid; width: calc(100vw - 25px); height: calc(100vh - 50px); border-radius: 10px; overflow: hidden; position: absolute">
-        <img id="p1" class="draggable" src="{{ p.p1.url }}" style="position: absolute; border-radius: 5px; {{ pos.0 }}">
-        <img id="p2" class="draggable" src="{{ p.p2.url }}" style="position: absolute; border-radius: 5px; {{ pos.1 }}">
-        <img id="p3" class="draggable" src="{{ p.p3.url }}" style="position: absolute; border-radius: 5px; {{ pos.2 }}">
-        <img id="p4" class="draggable" src="{{ p.p4.url }}" style="position: absolute; border-radius: 5px; {{ pos.3 }}">
+        <img id="p1" class="draggable" src="{{ p1 }}" style="position: absolute; border-radius: 5px; {{ pos.0 }}">
+        <img id="p2" class="draggable" src="{{ p2 }}" style="position: absolute; border-radius: 5px; {{ pos.1 }}">
+        <img id="p3" class="draggable" src="{{ p3 }}" style="position: absolute; border-radius: 5px; {{ pos.2 }}">
+        <img id="p4" class="draggable" src="{{ p4 }}" style="position: absolute; border-radius: 5px; {{ pos.3 }}">
     </div>
 
     <div v-if="win" style="position: fixed; left: 0; top: 0; width: 100vw; height: 97vh; text-align: center; z-index: 2000;cursor: pointer" @click="next">
@@ -39,6 +39,7 @@
           vue = this
           $("#app").show()
           options={}
+          options.snap = true
           options.stop = function(event, info) {
                 // console.log(info.offset.left, info.offset.top)
 
